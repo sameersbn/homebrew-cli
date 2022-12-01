@@ -5,62 +5,56 @@
 class Hello < Formula
   desc "Hello CLI"
   homepage "https://github.com/sameersbn/test-repo"
-  version "0.0.49"
+  version "0.0.50"
   license "Apache 2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.49/hello_macOS_amd64"
-      sha256 "fdfe7961ae8811213d36035bd2bf0d494f04fe84df1cfb3039ddc455f17c1e89"
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_macOS_amd64"
+      sha256 "06bf4547be778cdef8171ed2409be018128666cf056f61f930b17d5b5fe7dd1b"
 
       def install
-        bin.install => "hello"
-        chmod 0555, bin/"hello"
-        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+        bin.install "hello_macOS_amd64" => "hello"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.49/hello_macOS_arm64"
-      sha256 "9e86930482e382e2e16d7635521d722d5cc32f451bc7dedf81f137d4f733f8e5"
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_macOS_arm64"
+      sha256 "5846681d658d9544a9cc342f433dff9ce4b53e8d0441e7a2627df933336ac7be"
 
       def install
-        bin.install => "hello"
-        chmod 0555, bin/"hello"
-        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+        bin.install "hello_macOS_arm64" => "hello"
       end
     end
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.49/hello_linux_amd64"
-      sha256 "81db273f67a3adab98a57729176d462263d1b2efdd58bc4e5df30a74de9f4457"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_linux_arm64"
+      sha256 "a0c498045469e70e7eb3d98b0869dda31ee680d925cb139de7db6bf8e0e9d7b1"
 
       def install
-        bin.install => "hello"
-        chmod 0555, bin/"hello"
-        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+        bin.install "hello_linux_arm64" => "hello"
       end
     end
     if Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.49/hello_linux_armv6"
-      sha256 "274fa22f7dc4d09c854b5c6d0c8a3e76a43f0e14c0a546ee46956cfd4cfdaed3"
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_linux_armv6"
+      sha256 "4c103756d36faa0c82f1a06b51fd796806fa000e63b2cb50f62498b3a307f9a3"
 
       def install
-        bin.install => "hello"
-        chmod 0555, bin/"hello"
-        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+        bin.install "hello_linux_armv6" => "hello"
       end
     end
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.49/hello_linux_arm64"
-      sha256 "5550597a330b24da6570eae5434e6f9f8b0be00dfbd0a7a6c2706b1973c6cbb1"
+    if Hardware::CPU.intel?
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_linux_amd64"
+      sha256 "cada64d3da770877b96dfc760553fa3db05b5b9b82f89df17b280382c54e6212"
 
       def install
-        bin.install => "hello"
-        chmod 0555, bin/"hello"
-        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+        bin.install "hello_linux_amd64" => "hello"
       end
     end
+  end
+
+  def post_install
+    generate_completions_from_executable(#{bin}/"hello", shells: [:bash, :zsh])
   end
 end
