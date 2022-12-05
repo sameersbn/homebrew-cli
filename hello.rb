@@ -5,13 +5,13 @@
 class Hello < Formula
   desc "Hello CLI"
   homepage "https://github.com/sameersbn/test-repo"
-  version "0.0.53"
+  version "0.0.54"
   license "Apache 2.0"
   depends_on :macos
 
   on_macos do
-    url "https://github.com/sameersbn/test-repo/releases/download/v0.0.53/hello_macOS_amd64"
-    sha256 "c6464d2e807949d529f3d218e82ed475925b76daf74b8c715e211d508d713b92"
+    url "https://github.com/sameersbn/test-repo/releases/download/v0.0.54/hello_macOS_amd64"
+    sha256 "43b310eed156f9a305b15e1a8291a1817683f0737c9aa5e17fbdd204769f42d6"
 
     def install
       bin.install "hello_macOS_amd64" => "hello"
@@ -26,5 +26,9 @@ class Hello < Formula
         EOS
       end
     end
+  end
+
+  def post_install
+    generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
   end
 end
