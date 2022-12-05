@@ -5,26 +5,56 @@
 class Hello < Formula
   desc "Hello CLI"
   homepage "https://github.com/sameersbn/test-repo"
-  version "0.0.55"
+  version "0.0.56"
   license "Apache 2.0"
-  depends_on :macos
 
   on_macos do
-    url "https://github.com/sameersbn/test-repo/releases/download/v0.0.55/test-repo_macOS_amd64.tar.gz"
-    sha256 "a5bf1768d99f6f7eabb087a6d2922b2367a2c1d4f4a1051146a57912f672aded"
+    if Hardware::CPU.intel?
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.56/test-repo_macOS_amd64.tar.gz"
+      sha256 "6158cc82edeb62ba306b56709012de2d459035ef02be4818872098a8deef9a39"
 
-    def install
-      bin.install "hello"
-      generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+      def install
+        bin.install "hello"
+        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+      end
     end
-
     if Hardware::CPU.arm?
-      def caveats
-        <<~EOS
-          The darwin_arm64 architecture is not supported for the Hello
-          formula at this time. The darwin_amd64 binary may work in compatibility
-          mode, but it might not be fully supported.
-        EOS
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.56/test-repo_macOS_arm64.tar.gz"
+      sha256 "1dc04f0cb7df7c02226ac32759a71d0ca5f622109f028f679e250aed429d3e47"
+
+      def install
+        bin.install "hello"
+        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+      end
+    end
+  end
+
+  on_linux do
+    if Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.56/test-repo_linux_armv6.tar.gz"
+      sha256 "f347f5e3a2ef3ebae408f47d92bb7f4ef6480e823de62aa2ecbb905930b54fc9"
+
+      def install
+        bin.install "hello"
+        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+      end
+    end
+    if Hardware::CPU.intel?
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.56/test-repo_linux_amd64.tar.gz"
+      sha256 "4c3f548741b3887b531c8410b69fd22a1add124f6fedc56055861908d3c637a7"
+
+      def install
+        bin.install "hello"
+        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
+      end
+    end
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.56/test-repo_linux_arm64.tar.gz"
+      sha256 "476ccb7eee302221028b207d23f3d1ce1a281c01da61993f636881634da0898a"
+
+      def install
+        bin.install "hello"
+        generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
       end
     end
   end
