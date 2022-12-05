@@ -5,16 +5,17 @@
 class Hello < Formula
   desc "Hello CLI"
   homepage "https://github.com/sameersbn/test-repo"
-  version "0.0.54"
+  version "0.0.55"
   license "Apache 2.0"
   depends_on :macos
 
   on_macos do
-    url "https://github.com/sameersbn/test-repo/releases/download/v0.0.54/hello_macOS_amd64"
-    sha256 "43b310eed156f9a305b15e1a8291a1817683f0737c9aa5e17fbdd204769f42d6"
+    url "https://github.com/sameersbn/test-repo/releases/download/v0.0.55/test-repo_macOS_amd64.tar.gz"
+    sha256 "a5bf1768d99f6f7eabb087a6d2922b2367a2c1d4f4a1051146a57912f672aded"
 
     def install
-      bin.install "hello_macOS_amd64" => "hello"
+      bin.install "hello"
+      generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
     end
 
     if Hardware::CPU.arm?
@@ -26,9 +27,5 @@ class Hello < Formula
         EOS
       end
     end
-  end
-
-  def post_install
-    generate_completions_from_executable(bin/"hello", shells: [:bash, :zsh])
   end
 end
