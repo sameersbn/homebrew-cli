@@ -5,56 +5,26 @@
 class Hello < Formula
   desc "Hello CLI"
   homepage "https://github.com/sameersbn/test-repo"
-  version "0.0.50"
+  version "0.0.53"
   license "Apache 2.0"
+  depends_on :macos
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_macOS_amd64"
-      sha256 "06bf4547be778cdef8171ed2409be018128666cf056f61f930b17d5b5fe7dd1b"
+    url "https://github.com/sameersbn/test-repo/releases/download/v0.0.53/hello_macOS_amd64"
+    sha256 "c6464d2e807949d529f3d218e82ed475925b76daf74b8c715e211d508d713b92"
 
-      def install
-        bin.install "hello_macOS_amd64" => "hello"
-      end
+    def install
+      bin.install "hello_macOS_amd64" => "hello"
     end
+
     if Hardware::CPU.arm?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_macOS_arm64"
-      sha256 "5846681d658d9544a9cc342f433dff9ce4b53e8d0441e7a2627df933336ac7be"
-
-      def install
-        bin.install "hello_macOS_arm64" => "hello"
+      def caveats
+        <<~EOS
+          The darwin_arm64 architecture is not supported for the Hello
+          formula at this time. The darwin_amd64 binary may work in compatibility
+          mode, but it might not be fully supported.
+        EOS
       end
     end
-  end
-
-  on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_linux_arm64"
-      sha256 "a0c498045469e70e7eb3d98b0869dda31ee680d925cb139de7db6bf8e0e9d7b1"
-
-      def install
-        bin.install "hello_linux_arm64" => "hello"
-      end
-    end
-    if Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_linux_armv6"
-      sha256 "4c103756d36faa0c82f1a06b51fd796806fa000e63b2cb50f62498b3a307f9a3"
-
-      def install
-        bin.install "hello_linux_armv6" => "hello"
-      end
-    end
-    if Hardware::CPU.intel?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.50/hello_linux_amd64"
-      sha256 "cada64d3da770877b96dfc760553fa3db05b5b9b82f89df17b280382c54e6212"
-
-      def install
-        bin.install "hello_linux_amd64" => "hello"
-      end
-    end
-  end
-
-  def post_install
-    generate_completions_from_executable(#{bin}/"hello", shells: [:bash, :zsh])
   end
 end
