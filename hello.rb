@@ -5,21 +5,21 @@
 class Hello < Formula
   desc "Hello CLI"
   homepage "https://github.com/sameersbn/test-repo"
-  version "0.0.60"
+  version "0.0.61-rc.1"
   license "Apache 2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.60/test-repo_macOS_amd64.tar.gz"
-      sha256 "69fb682a431a7b2bc89c68bf6aad40cf513fe323df87e3abbd64213e1c053d0f"
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.61-rc.1/test-repo_macOS_amd64.tar.gz"
+      sha256 "a033053e465931fe5c899cd41762bec1c9db650876f6556ba6fdd0480698d8be"
 
       def install
         bin.install "hello"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.60/test-repo_macOS_arm64.tar.gz"
-      sha256 "09ade623e03fec793185969212d3da9d10a04b33a468feeb067f93d7a12655e0"
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.61-rc.1/test-repo_macOS_arm64.tar.gz"
+      sha256 "38659061d43ffb5b56f1363b5504e2f2130b3703d22c762fceafa7355e882895"
 
       def install
         bin.install "hello"
@@ -29,24 +29,24 @@ class Hello < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.60/test-repo_linux_arm64.tar.gz"
-      sha256 "4f3d287ae84ea064623c5c15d6d540b7c523b03e8abcf0fa35573b55e1e9ddd4"
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.61-rc.1/test-repo_linux_arm64.tar.gz"
+      sha256 "ad8bc8e1dc3385e165effb69cedd099ba8afb8de56a25463f73bf5d35abd9c62"
 
       def install
         bin.install "hello"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.60/test-repo_linux_amd64.tar.gz"
-      sha256 "103edea925d3091a8c3c26144cc9cbac5755eaf0ab93ddcf721fdfde2af8a628"
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.61-rc.1/test-repo_linux_amd64.tar.gz"
+      sha256 "34c17a7e924541c8774e5625d4b063f3d30571819165146fa3e6740e0d6c33cf"
 
       def install
         bin.install "hello"
       end
     end
     if Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.60/test-repo_linux_armv6.tar.gz"
-      sha256 "5bc1d5e4d294188af9a25b55e2c582c53029d9093e5ecb1202e86c53d4c1176f"
+      url "https://github.com/sameersbn/test-repo/releases/download/v0.0.61-rc.1/test-repo_linux_armv6.tar.gz"
+      sha256 "e709d966e9fdb8e573dcc45158403e290fa67a47da7c584505a23e90678b2cbc"
 
       def install
         bin.install "hello"
